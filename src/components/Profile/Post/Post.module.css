@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    outline: 1px solid red;
+    margin: 10px;
+}
+
+.image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
