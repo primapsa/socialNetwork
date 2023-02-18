@@ -1,0 +1,10 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+.dialogItem {
+
+}
+.messages {
+    outline: 1px solid green;
+}
