@@ -1,22 +1,24 @@
 import React from "react";
 import styles from "./Navbar.module.css"
+import {NavLink} from "react-router-dom";
+
 const Navbar = () => {
     return (
         <nav className={styles.nav}>
             <div>
-                <a href="samurai-way/src/components">Profile</a>
+                <NavLink to={'/profile'}>Profile</NavLink>
             </div>
             <div>
-                <a href="samurai-way/src/components">Messages</a>
+                <NavLink to={'/messages'}>Messages</NavLink>
             </div>
             <div>
-                <a href="samurai-way/src/components">News</a>
+                <NavLink to={'/news'}>News</NavLink>
             </div>
             <div>
-                <a href="samurai-way/src/components">Music</a>
+                <NavLink to={'/music'}>Music</NavLink>
             </div>
             <div>
-                <a href="samurai-way/src/components">Settings</a>
+                <NavLink to={'/settings'}>Settings</NavLink>
             </div>
         </nav>
     );
