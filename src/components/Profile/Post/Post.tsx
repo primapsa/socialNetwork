@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "./Post.module.css"
-type PropsPosts = {
-    message?: string;
-}
-const Post = (props: PropsPosts) => {
+import {UserPosts} from "../types";
+
+const Post = (props: UserPosts) => {
     return (
         <>
             <div className={styles.container}>
