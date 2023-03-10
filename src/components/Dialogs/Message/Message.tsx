@@ -1,12 +1,10 @@
 import React from "react";
-import styles from './Message.module.css'
+import {MessagePropsType} from "../types";
 
-type MessageType = {
-    message: string;
-    id: number;
-}
 
-const Message = (props: MessageType) => {
+
+const Message = (props: MessagePropsType) => {
+
     return (
         <div className={`Msg ${props.id}`}>{props.message}</div>
     )
