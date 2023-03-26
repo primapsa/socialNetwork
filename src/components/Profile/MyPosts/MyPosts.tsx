@@ -3,7 +3,7 @@ import styles from "./MyPosts.module.css"
 import Post from "../Post/Post";
 import {MyPostsPropsType, UserPosts} from "../types";
 import {log} from "util";
-import {addNewPost, addNewPostText} from "../../../redux/state";
+import {addNewPost, addNewPostText} from "../../../redux/postsReducer";
 
 const MyPosts = ({dispatch, state}: MyPostsPropsType) => {
     const inputValue: LegacyRef<HTMLTextAreaElement> = React.createRef();
