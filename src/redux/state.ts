@@ -95,8 +95,8 @@ export let store: StoreType = {
     }
 }
 
-export const addNewMessageTextAC = (value: string) => ({type: 'ADD-NEW-MESSAGE-TEXT', value: value})
-export const addNewUserMessageAC = () => ({type: 'ADD-NEW-USER-MESSAGE'})
-export const addNewPost = () => ({type: 'ADD_NEW_POST'})
-export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value})
+// export const addNewMessageTextAC = (value: string) => ({type: 'ADD-NEW-MESSAGE-TEXT', value: value})
+// export const addNewUserMessageAC = () => ({type: 'ADD-NEW-USER-MESSAGE'})
+// export const addNewPost = () => ({type: 'ADD_NEW_POST'})
+// export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value})
 export default store;
