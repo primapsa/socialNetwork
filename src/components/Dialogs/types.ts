@@ -1,8 +1,8 @@
-import {ActionType, ProfileType, stateInType} from "../../types";
+import {ActionType, ActionTypeExtended, ProfileType, stateInType} from "../../types";
 
 export type DialogsType = {
     state: stateInType;
-    dispatch: (action: ActionType) => void;
+    dispatch: (action: ActionTypeExtended) => void;
 }
 type UserListType = {
     id: number;
