@@ -3,20 +3,18 @@ import styles from "./MyPosts.module.css"
 import Post from "../Post/Post";
 import {MyPostsPropsType, UserPosts} from "../types";
 import {log} from "util";
+import {addNewPost, addNewPostText} from "../../../redux/state";
 
-const MyPosts = ({dispatch, state}:MyPostsPropsType) => {
+const MyPosts = ({dispatch, state}: MyPostsPropsType) => {
     const inputValue: LegacyRef<HTMLTextAreaElement> = React.createRef();
     const {posts} = state;
     const calue = inputValue?.current?.value || '';
     const addPost = () => {
-
-      //  props.addPost(calue);
-        dispatch({type: 'ADD_NEW_POST'})
+        dispatch(addNewPost());
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let caluee = inputValue?.current?.value || '';
-       dispatch({type: 'ADD_NEW_INPUT', inputValue: caluee })
-       // props.addNewInputValue(caluee);
+        dispatch(addNewPostText(caluee));
     }
 
     return (
@@ -27,7 +25,7 @@ const MyPosts = ({dispatch, state}:MyPostsPropsType) => {
                 <button onClick={addPost}>Add post</button>
             </div>
             {
-               posts.postsText.map(p => <Post key={p.id} id={p.id} message={p.message}/>)
+                posts.postsText.map(p => <Post key={p.id} id={p.id} message={p.message}/>)
             }
 
         </>
