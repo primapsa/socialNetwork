@@ -1,6 +1,7 @@
 import {ActionTypeExtended, PostsInnerStateType} from "../types";
 
-
+export const addNewPost = () => ({type: 'ADD_NEW_POST'})
+export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value})
 
 const PostsReducer = (state : PostsInnerStateType, action: ActionTypeExtended): PostsInnerStateType => {
     switch (action.type) {
