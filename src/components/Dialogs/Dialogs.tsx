@@ -4,7 +4,7 @@ import styles from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogsType} from "./types";
-import {addNewMessageTextAC, addNewUserMessageAC} from "../../redux/state";
+import {addNewMessageTextAC, addNewUserMessageAC} from "../../redux/messagesReducer";
 
 
 const Dialogs = ({state, dispatch}: DialogsType) => {
