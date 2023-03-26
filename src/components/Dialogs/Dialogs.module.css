@@ -8,3 +8,7 @@
 .messages {
     outline: 1px solid green;
 }
+.messagesText {
+    display: flex;
+    outline: 1px solid red;
+}
