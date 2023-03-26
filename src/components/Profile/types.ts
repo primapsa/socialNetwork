@@ -1,9 +1,9 @@
-import {ActionType, stateInType} from "../../types";
+import {ActionType, ActionTypeExtended, stateInType} from "../../types";
 
 
 export type ProfilePropsType = {
     state: stateInType;
-    dispatch: (action: ActionType) => void;
+    dispatch: (action: ActionTypeExtended) => void;
     // userPosts: UserPosts[];
     // addPost: (v: string) => void;
     // inputValue: string;
@@ -15,7 +15,7 @@ export type UserPosts = {
 }
 export type MyPostsPropsType = {
     state: stateInType;
-    dispatch: (action: ActionType) => void;
+    dispatch: (action: ActionTypeExtended) => void;
     // posts: UserPosts[];
     // addPost: (v: string) => void;
     // inputValue: string;
