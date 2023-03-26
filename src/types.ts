@@ -2,7 +2,7 @@ import {UserPosts} from './components/Profile/types'
 
 export type AppType = {
     state: stateInType
-    dispatch: (action: ActionType) => void;
+    dispatch: (action: ActionTypeExtended) => void;
 }
 export type StateType = {
     state: stateInType;
@@ -17,7 +17,7 @@ export type stateInType = {
     posts: PostsInnerStateType;
     messages: MessagesStateType;
 }
-type PostsInnerStateType = {
+export type PostsInnerStateType = {
     postsText: PostsStateType[];
     inputValue: string;
 }
@@ -44,6 +44,12 @@ export type ProfileType = {
 export type  ActionType = {
     [keys: string]: string
 }
+export type ActionTypeExtended = {
+    type: string
+    inputValue?: string
+    value?:string
+
+}
 export type StoreType = {
     _state: stateInType;
     getState: () => stateInType;
@@ -51,7 +57,7 @@ export type StoreType = {
     subscribe: (o: (arg: stateInType) => void) => void
     // addNewPost: (p: string) => void;
     // addNewInputValue: (v: string) => void;
-    dispatch: (action: ActionType) => void;
+    dispatch: (action: ActionTypeExtended) => void;
 
 
 }
