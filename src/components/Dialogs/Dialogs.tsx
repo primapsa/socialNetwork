@@ -12,6 +12,8 @@ const Dialogs = ({state, dispatch}: DialogsType) => {
     const textareaHandler = (e: ChangeEvent<HTMLTextAreaElement>) =>
         dispatch(addNewMessageTextAC(e.currentTarget.value));
     const onclickHandler =() => dispatch(addNewUserMessageAC())
+
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogItem}>
