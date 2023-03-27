@@ -56,8 +56,8 @@ export let store: StoreType = {
     dispatch(action) {
 
 
-        this._state.posts = postsReducer(this._state.posts, action)
-        this._state.messages = messagesReducer(this._state.messages, action)
+      //  this._state.posts = postsReducer(this._state.posts, action)
+       // this._state.messages = messagesReducer(this._state.messages, action)
         this._subscriber(this._state);
 
         //
