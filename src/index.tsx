@@ -7,22 +7,16 @@ import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 
 
-const rerenderTree = (state: any) => {
-    ReactDOM.render(
-       <Provider store={store}>
-           <App
-               // state={store.getState()}
-               // dispatch = {store.dispatch.bind(store)}
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>
+    ,
+    document.getElementById('root')
+);
 
-           />
-       </Provider>
-        ,
-        document.getElementById('root')
-    );
-}
-rerenderTree(store.getState());
-store.subscribe(() => rerenderTree(store.getState()));
 
-export default rerenderTree;
+
+
 
 
