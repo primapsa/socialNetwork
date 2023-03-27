@@ -1,7 +1,12 @@
-import {ActionTypeExtended, PostsInnerStateType} from "../types";
+import {PostsInnerStateType} from "../types";
 
-export const addNewPost = () => ({type: 'ADD_NEW_POST'})
-export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value})
+export type ActionType = AddNewPostType | AddNewPostTextType
+type AddNewPostType = ReturnType<typeof addNewPost>
+type AddNewPostTextType = ReturnType<typeof addNewPostText>
+
+export const addNewPost = () => ({type: 'ADD_NEW_POST'} as const)
+export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value} as const)
+
 const initial = {
     postsText: [
         {id: 1, message: 'Hello, how are you&'},
@@ -15,18 +20,18 @@ const initial = {
     ],
     inputValue: ''
 }
-const PostsReducer = (state : PostsInnerStateType = initial, action: ActionTypeExtended): PostsInnerStateType => {
+
+const PostsReducer = (state: PostsInnerStateType = initial, action: ActionType): PostsInnerStateType => {
     switch (action.type) {
         case 'ADD_NEW_INPUT':
-            state.inputValue = action.inputValue as string
-            return state;
+            return {...state, inputValue: action.inputValue}
         case 'ADD_NEW_POST':
-            state.postsText.push({id: 6, message: state.inputValue})
-            state.inputValue = '';
-            return state;
+            const newMessage = {id: state.postsText.length + 1, message: state.inputValue}
+            return {...state, postsText: [...state.postsText, newMessage]}
         default :
             return state;
     }
 
 }
+
 export default PostsReducer
