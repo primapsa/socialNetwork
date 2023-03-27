@@ -21,7 +21,7 @@ export type PostsInnerStateType = {
     postsText: PostsStateType[];
     inputValue: string;
 }
-type UsersStateType = {
+export type UsersStateType = {
     id: number;
     username: string;
 }
