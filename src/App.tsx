@@ -5,34 +5,20 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Router} from "react-router-dom";
-import {AppType, StateType} from "./types";
+import {StateType} from "./types";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
+type AppPropsType = {};
 
-
-function App({state, dispatch}: AppType) {
+function App (props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div>
-                    <Route path='/profile'
-                           render={() => <Profile
-                               dispatch = {dispatch}
-                               state = {state}
-                               // userPosts={props.state.posts.postsText}
-                               // dispatch = {props.dispatch}
-                               // state = {props.state}
-                               // addPost={props.addPost}
-                               // inputValue={props.state.posts.inputValue}
-                               // addNewInputValue={props.addNewInputValue}
-                           />}/>
-                    <Route path='/messages'
-                           render={() =>
-                               <Dialogs
-                                   state={state}
-                                   dispatch={dispatch}
-                               />}/>
+                    <Route path='/profile' component={Profile} />
+                    <Route path='/messages' component={DialogsContainer} />
                 </div>
 
             </div>
