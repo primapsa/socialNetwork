@@ -6,7 +6,7 @@ import {Dispatch} from "redux";
 
 const mapStateToProps = (state: StateType) => {
     return {
-        state
+        state: state.messages
     }
 }
 const mapDispatchStateToProps = (dispatch: Dispatch) => {
