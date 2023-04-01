@@ -1,4 +1,3 @@
-import {MessagesStateType} from "../types";
 
 type ActionType = AddNewUserMessageACType | AddNewMessageTextACype
 type AddNewUserMessageACType = ReturnType<typeof addNewUserMessageAC>
@@ -8,6 +7,16 @@ export const addNewMessageTextAC = (value: string) => ({type: 'ADD-NEW-MESSAGE-T
 export const addNewUserMessageAC = () => ({type: 'ADD-NEW-USER-MESSAGE'} as const)
 
 const initial = {
+    messageUser: [
+        {id: 1, username: 'Vasya'},
+        {id: 2, username: 'Igor'},
+        {id: 3, username: 'Lena'},
+        {id: 4, username: 'Mashs'},
+        {id: 5, username: 'Sveta'},
+        {id: 6, username: 'VAlera'},
+        {id: 7, username: 'Sergey'},
+        {id: 8, username: 'VAdim'},
+    ],
     messagesText: [
         {id: 1, message: 'Hello, how are you&'},
         {id: 2, message: 'What is going on?'},
@@ -20,7 +29,20 @@ const initial = {
     ],
     messagesTextarea: ''
 }
+export type MessagesStateType = {
+    messageUser: MessageUserType[]
+    messagesText: MessagesTextType[]
+    messagesTextarea: string
 
+}
+type MessageUserType = {
+    id: number
+    username: string
+}
+type MessagesTextType = {
+    id: number
+    message: string
+}
 const messagesReducer = (state: MessagesStateType = initial, action: ActionType): MessagesStateType => {
 
     switch (action.type) {
