@@ -51,7 +51,7 @@ export type ActionTypeExtended = {
 
 }
 export type StoreType = {
-    _state: stateInType;
+    _state: any;
     getState: () => stateInType;
     _subscriber: (arg: stateInType) => void;
     subscribe: (o: (arg: stateInType) => void) => void
