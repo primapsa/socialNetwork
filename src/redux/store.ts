@@ -4,17 +4,18 @@ import messagesReducer from "./messagesReducer";
 
 
 const stateValue = {
-    users: [
-        {id: 1, username: 'Vasya'},
-        {id: 2, username: 'Igor'},
-        {id: 3, username: 'Lena'},
-        {id: 4, username: 'Mashs'},
-        {id: 5, username: 'Sveta'},
-        {id: 6, username: 'VAlera'},
-        {id: 7, username: 'Sergey'},
-        {id: 8, username: 'VAdim'},
-    ],
+
     messages: {
+        messageUser: [
+            {id: 1, username: 'Vasya'},
+            {id: 2, username: 'Igor'},
+            {id: 3, username: 'Lena'},
+            {id: 4, username: 'Mashs'},
+            {id: 5, username: 'Sveta'},
+            {id: 6, username: 'VAlera'},
+            {id: 7, username: 'Sergey'},
+            {id: 8, username: 'VAdim'},
+        ],
         messagesText: [
             {id: 1, message: 'Hello, how are you&'},
             {id: 2, message: 'What is going on?'},
