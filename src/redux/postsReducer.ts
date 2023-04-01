@@ -9,7 +9,7 @@ export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputV
 
 const initial = {
     postsText: [
-        {id: 1, message: 'Hello, how are you&'},
+        {id: 1, message: 'POST!!!!!'},
         {id: 2, message: 'What is going on?'},
         {id: 3, message: 'Nothing'},
         {id: 4, message: 'Good'},
@@ -20,14 +20,21 @@ const initial = {
     ],
     inputValue: ''
 }
-
-const PostsReducer = (state: PostsInnerStateType = initial, action: ActionType): PostsInnerStateType => {
+export type PostStateType = {
+    postsText: PostTextType[]
+    inputValue: string
+}
+type PostTextType = {
+    id: number
+    message: string
+}
+const PostsReducer = (state: PostStateType = initial, action: ActionType): PostStateType => {
     switch (action.type) {
         case 'ADD_NEW_INPUT':
             return {...state, inputValue: action.inputValue}
         case 'ADD_NEW_POST':
             const newMessage = {id: state.postsText.length + 1, message: state.inputValue}
-            return {...state, postsText: [...state.postsText, newMessage]}
+            return {...state, postsText: [...state.postsText, newMessage], inputValue: ''}
         default :
             return state;
     }
