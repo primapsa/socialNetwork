@@ -1,30 +1,32 @@
-import React, {ChangeEvent, LegacyRef, useRef} from "react";
-import styles from "./MyPosts.module.css"
+import React, {ChangeEvent, LegacyRef} from "react";
 import Post from "../Post/Post";
-import {MyPostsPropsType, UserPosts} from "../types";
-import {addNewPost, addNewPostText} from "../../../redux/postsReducer";
+import {addNewPost, addNewPostText, PostStateType} from "../../../redux/postsReducer";
+import {Dispatch} from "redux";
 
-const MyPosts = ({dispatch, state}: MyPostsPropsType) => {
+type MyPostsPropsType = {
+     state: PostStateType
+     dispatch: Dispatch
+ }
+const MyPosts = ({state, dispatch}: MyPostsPropsType) => {
     const inputValue: LegacyRef<HTMLTextAreaElement> = React.createRef();
-    const {posts} = state;
-    const calue = inputValue?.current?.value || '';
+
     const addPost = () => {
         dispatch(addNewPost());
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let caluee = inputValue?.current?.value || '';
-        dispatch(addNewPostText(caluee));
+        let newPostText = inputValue?.current?.value || '';
+        dispatch(addNewPostText(newPostText));
     }
 
     return (
         <>
             <div>User Avatar + description</div>
             <div>
-                <textarea ref={inputValue} value={posts.inputValue} onChange={onChangeInputHandler}></textarea>
+                <textarea ref={inputValue} value={state.inputValue} onChange={onChangeInputHandler}></textarea>
                 <button onClick={addPost}>Add post</button>
             </div>
             {
-                posts.postsText.map(p => <Post key={p.id} id={p.id} message={p.message}/>)
+                state.postsText.map(p => <Post key={p.id} id={p.id} message={p.message}/>)
             }
 
         </>
