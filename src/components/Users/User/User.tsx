@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './User.module.css'
-import {UsersStateType} from "../../../redux/usersReducer";
+import {UsersType} from "../../../redux/usersReducer";
+import avatar from './../../../image/avatar.png'
 
 type UserPropsType = {
-    user: UsersStateType
+    user: UsersType
     follow: (id: number) => void
     unfollow: (id: number) => void
 }
@@ -11,20 +12,20 @@ type UserPropsType = {
 const User = ({user, follow, unfollow}: UserPropsType) => {
     const onclickHandler = () => {
 
-        user.isFollow ? unfollow(user.id) : follow(user.id)
+        user.followed ? unfollow(user.id) : follow(user.id)
     }
     return (
         <div className={styles.user}>
             <div className={styles.row}>
-                <img className={styles.avatar} src={user.data.photo} alt="logo"/>
-                <button onClick={onclickHandler}>{user.isFollow ? 'FOLLOW' : 'UNFOLLOW'}</button>
+                <img className={styles.avatar} src={user.photos.small ? user.photos.small : avatar } alt="logo"/>
+                <button onClick={onclickHandler}>{user.followed ? 'FOLLOW' : 'UNFOLLOW'}</button>
             </div>
             <div className={styles.row}>
-                <span>{user.data.firstName + ' ' + user.data.lastName}</span>
+                <span>{user.name}</span>
             </div>
             <div className={styles.row}>
-                <span>{user.place.country}</span>
-                <span>{user.place.city}</span>
+                <span>{user.status}</span>
+                <span>{user.uniqueUrlName}</span>
             </div>
         </div>
     );
