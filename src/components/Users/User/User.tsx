@@ -14,6 +14,7 @@ const User = ({user, follow, unfollow}: UserPropsType) => {
 
         user.followed ? unfollow(user.id) : follow(user.id)
     }
+
     return (
         <div className={styles.user}>
             <div className={styles.row}>
