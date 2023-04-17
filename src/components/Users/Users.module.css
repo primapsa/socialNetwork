@@ -1,3 +1,7 @@
 .active {
     font-weight: bold;
 }
+.pagination {
+    max-width: 300px;
+    overflow: hidden;
+}
