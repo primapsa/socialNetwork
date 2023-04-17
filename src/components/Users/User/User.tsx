@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './User.module.css'
 import {UsersType} from "../../../redux/usersReducer";
 import avatar from './../../../image/avatar.png'
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     user: UsersType
@@ -18,7 +19,9 @@ const User = ({user, follow, unfollow}: UserPropsType) => {
     return (
         <div className={styles.user}>
             <div className={styles.row}>
-                <img className={styles.avatar} src={user.photos.small ? user.photos.small : avatar } alt="logo"/>
+                <NavLink to={`profile/${user.id}`}>
+                    <img className={styles.avatar} src={user.photos.small ? user.photos.small : avatar} alt="logo"/>
+                </NavLink>
                 <button onClick={onclickHandler}>{user.followed ? 'FOLLOW' : 'UNFOLLOW'}</button>
             </div>
             <div className={styles.row}>
