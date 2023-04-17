@@ -2,7 +2,7 @@ import React from "react";
 import store, {StateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {followAC, setCurrentPageAC, setTotalCountAC, setUsersAC, unfollowAC, UsersType} from "../../redux/usersReducer";
+import {follow, setCurrentPage, setTotalCount, setUsers, unfollow, UsersType} from "../../redux/usersReducer";
 import axios from "axios";
 import Users from "./Users";
 
@@ -63,15 +63,15 @@ const mapStateToProp = (state: StateType) => (
         currentPage: state.users.currentPage
     }
 )
-const mapDispatchToProps = (dispatch: Dispatch) => (
-    {
-        follow: (id: number) => dispatch(followAC(id)),
-        unfollow: (id: number) => dispatch(unfollowAC(id)),
-        setUsers: (users: UsersType[]) => dispatch(setUsersAC(users)),
-        setCurrentPage: (page: number) => dispatch(setCurrentPageAC(page)),
-        setTotalCount: (totalCount: number) => dispatch(setTotalCountAC(totalCount))
-    })
+// const mapDispatchToProps = (dispatch: Dispatch) => (
+//     {
+//         follow: (id: number) => dispatch(follow(id)),
+//         unfollow: (id: number) => dispatch(unfollow(id)),
+//         setUsers: (users: UsersType[]) => dispatch(setUsers(users)),
+//         setCurrentPage: (page: number) => dispatch(setCurrentPage(page)),
+//         setTotalCount: (totalCount: number) => dispatch(setTotalCount(totalCount))
+//     })
 
 
 
-export default connect(mapStateToProp, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProp, {follow, unfollow, setUsers, setCurrentPage, setTotalCount})(UsersContainer)
