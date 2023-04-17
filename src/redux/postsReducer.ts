@@ -1,11 +1,13 @@
-import {PostsInnerStateType} from "../types";
+import {PostsInnerStateType, ProfileInnerType} from "../types";
 
-export type ActionType = AddNewPostType | AddNewPostTextType
+export type ActionType = AddNewPostType | AddNewPostTextType | SetProfileType
 type AddNewPostType = ReturnType<typeof addNewPost>
 type AddNewPostTextType = ReturnType<typeof addNewPostText>
-
+type SetProfileType = ReturnType<typeof setProfile>
 export const addNewPost = () => ({type: 'ADD_NEW_POST'} as const)
 export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value} as const)
+export const setProfile = (value: ProfileInnerType | null) => ({type: 'SET_PROFILE', profile: value} as const)
+
 
 const initial = {
     postsText: [
@@ -18,11 +20,13 @@ const initial = {
         {id: 7, message: 'Be happy'},
         {id: 8, message: 'Okay'},
     ],
-    inputValue: ''
+    inputValue: '',
+    profile: null
 }
 export type PostStateType = {
     postsText: PostTextType[]
     inputValue: string
+    profile: ProfileInnerType | null
 }
 type PostTextType = {
     id: number
@@ -35,6 +39,8 @@ const PostsReducer = (state: PostStateType = initial, action: ActionType): PostS
         case 'ADD_NEW_POST':
             const newMessage = {id: state.postsText.length + 1, message: state.inputValue}
             return {...state, postsText: [...state.postsText, newMessage], inputValue: ''}
+        case "SET_PROFILE":
+            return {...state, profile: action.profile}
         default :
             return state;
     }
