@@ -20,6 +20,19 @@ export type stateInType = {
 export type PostsInnerStateType = {
     postsText: PostsStateType[];
     inputValue: string;
+    profile: ProfileInnerType | null
+}
+export type ProfileInnerType = {
+    userId: number
+    aboutMe: string
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    contacts: Object
+    photos: {
+        small: string
+        large: string
+    }
 }
 export type UsersStateType = {
     id: number;
@@ -47,7 +60,7 @@ export type  ActionType = {
 export type ActionTypeExtended = {
     type: string
     inputValue?: string
-    value?:string
+    value?: string
 
 }
 export type StoreType = {
