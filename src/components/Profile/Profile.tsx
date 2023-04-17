@@ -1,24 +1,22 @@
 import React from "react";
-import styles from "./Profile.module.css"
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ProfileType} from "../../types";
-import {ProfilePropsType} from "./types";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ActionTypeExtended, PostsInnerStateType, stateInType} from "../../types";
+import MyPosts from "./MyPosts/MyPosts";
+import {addNewPost, addNewPostText} from "../../redux/postsReducer";
 
-const Profile = (props: ProfilePropsType) => {
+export type ProfilePropsType = {
+    state: PostsInnerStateType;
+    addNewPost: () => void
+    addNewPostText: (text: string) => void
+
+}
+const Profile = ({state,addNewPost,addNewPostText  }: ProfilePropsType) => {
+
     return (
         <div className='content'>
             <ProfileInfo/>
-            <MyPostsContainer/>
-            {/*<MyPosts*/}
-            {/*    state = {props.state}*/}
-            {/*    dispatch = {props.dispatch}*/}
-            {/*    // posts={props.userPosts}*/}
-            {/*    // addPost={props.addPost}*/}
-            {/*    // inputValue={props.inputValue}*/}
-            {/*    // addNewInputValue={props.addNewInputValue}*/}
-            {/*/>*/}
+            <MyPosts state={state} addNewPost={addNewPost} addNewPostText={addNewPostText} />
         </div>
     );
 }
