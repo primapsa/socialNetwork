@@ -1,26 +1,52 @@
 import React, {ChangeEvent, LegacyRef} from "react";
 import Post from "../Post/Post";
-import {addNewPost, addNewPostText, PostStateType} from "../../../redux/postsReducer";
-import {Dispatch} from "redux";
+
 
 type MyPostsPropsType = {
-     state: PostStateType
-     dispatch: Dispatch
+    state: PostsInnerStateType;
+    addNewPost: () => void
+    addNewPostText: (text: string) => void
  }
-const MyPosts = ({state, dispatch}: MyPostsPropsType) => {
+ type PostsInnerStateType = {
+    postsText: PostsStateType[];
+    inputValue: string;
+    profile: ProfileInnerType | null
+}
+export type ProfileInnerType = {
+    userId: number
+    aboutMe: string
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    contacts: Object
+    photos: {
+        small: string
+        large: string
+    }
+}
+type PostsStateType = {
+    id: number;
+    message: string;
+}
+const MyPosts = ({state, addNewPost,addNewPostText }: MyPostsPropsType) => {
+    console.log(state)
+
     const inputValue: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
     const addPost = () => {
-        dispatch(addNewPost());
+        addNewPost()
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newPostText = inputValue?.current?.value || '';
-        dispatch(addNewPostText(newPostText));
+        // dispatch(addNewPostText(newPostText));
+        addNewPostText(newPostText)
     }
 
     return (
         <>
-            <div>User Avatar + description</div>
+            <div>
+                <img src={state?.profile?.photos.large} alt=""/>
+            </div>
             <div>
                 <textarea ref={inputValue} value={state.inputValue} onChange={onChangeInputHandler}></textarea>
                 <button onClick={addPost}>Add post</button>
