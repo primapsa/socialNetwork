@@ -15,7 +15,7 @@ const Profile = ({state,addNewPost,addNewPostText  }: ProfilePropsType) => {
 
     return (
         <div className='content'>
-            <ProfileInfo/>
+            <ProfileInfo userInfo={state}/>
             <MyPosts state={state} addNewPost={addNewPost} addNewPostText={addNewPostText} />
         </div>
     );
