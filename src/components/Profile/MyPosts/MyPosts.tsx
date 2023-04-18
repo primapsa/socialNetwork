@@ -29,7 +29,7 @@ type PostsStateType = {
     message: string;
 }
 const MyPosts = ({state, addNewPost,addNewPostText }: MyPostsPropsType) => {
-    console.log(state)
+
 
     const inputValue: LegacyRef<HTMLTextAreaElement> = React.createRef();
 
@@ -44,9 +44,7 @@ const MyPosts = ({state, addNewPost,addNewPostText }: MyPostsPropsType) => {
 
     return (
         <>
-            <div>
-                <img src={state?.profile?.photos.large} alt=""/>
-            </div>
+
             <div>
                 <textarea ref={inputValue} value={state.inputValue} onChange={onChangeInputHandler}></textarea>
                 <button onClick={addPost}>Add post</button>
