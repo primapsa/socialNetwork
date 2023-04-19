@@ -1,8 +1,12 @@
-export const followAC = (id: number) => ({type: 'FOLLOW', payload: {id}} as const)
-export const unfollowAC = (id: number) => ({type: 'UNFOLLOW', payload: {id}} as const)
-export const setUsersAC = (users: UsersType[]) => ({type: 'SET-USERS', payload: {users}} as const)
-export const setCurrentPageAC = (page: number) => ({type: 'SET-CURRENT-PAGE', payload: {page}} as const)
-export const setTotalCountAC = (totalCount: number) => ({type: 'SET-TOTAL-COUNT', payload: {totalCount}} as const)
+export const follow = (id: number) => ({type: 'FOLLOW', payload: {id}} as const)
+export const unfollow = (id: number) => ({type: 'UNFOLLOW', payload: {id}} as const)
+export const setUsers = (users: UsersType[]) => ({type: 'SET-USERS', payload: {users}} as const)
+export const setCurrentPage = (page: number) => ({type: 'SET-CURRENT-PAGE', payload: {page}} as const)
+export const setTotalCount = (totalCount: number) => ({type: 'SET-TOTAL-COUNT', payload: {totalCount}} as const)
+export const toggleMakingRequest = (isFetching: boolean, userID: number) => ({
+    type: 'TOGGLE-MAKING-REQUEST',
+    payload: {isFetching, userID}
+} as const)
 
 
 type ActionType = FollowACType
@@ -10,24 +14,28 @@ type ActionType = FollowACType
     | SetUsersACType
     | setCurrentPageACType
     | setTotalCountACType
+    | toggleMakingRequestType
 
-type FollowACType = ReturnType<typeof followAC>
-type UnFollowACType = ReturnType<typeof unfollowAC>
-type SetUsersACType = ReturnType<typeof setUsersAC>
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type setTotalCountACType = ReturnType<typeof setTotalCountAC>
+type FollowACType = ReturnType<typeof follow>
+type UnFollowACType = ReturnType<typeof unfollow>
+type SetUsersACType = ReturnType<typeof setUsers>
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+type setTotalCountACType = ReturnType<typeof setTotalCount>
+type toggleMakingRequestType = ReturnType<typeof toggleMakingRequest>
 
 const initial = {
     userPage: [],
     userPerPage: 10,
     totalCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    makingRequestFor: []
 }
 export type UsersStateType = {
     userPage: UsersType[]
     userPerPage: number
     totalCount: number
     currentPage: number
+    makingRequestFor: number[]
 }
 export type UsersType = {
     id: number
@@ -76,8 +84,15 @@ const UsersReducer = (state: UsersStateType = initial, action: ActionType): User
 
         case "SET-TOTAL-COUNT":
             return {...state, totalCount: action.payload.totalCount}
+        case "TOGGLE-MAKING-REQUEST":
+            return {
+                ...state,
+                makingRequestFor: action.payload.isFetching ? [...state.makingRequestFor, action.payload.userID]
+                    : state.makingRequestFor.filter(e => e !== action.payload.userID)
+            }
 
-        default :
+
+        default:
             return state;
     }
 
