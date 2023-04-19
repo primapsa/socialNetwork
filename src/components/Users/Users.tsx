@@ -12,6 +12,8 @@ type UsersPropsType = {
     unfollow: (id: number) => void
     currentPage: number
     setPage: (page: number) => void
+    toggleMakingRequest: (isFetching: boolean, userID: number) => void
+    makingRequestFor: number[]
 
 }
 export const Users = (props: UsersPropsType) => {
@@ -19,7 +21,13 @@ export const Users = (props: UsersPropsType) => {
     const pages = Math.ceil(props.totalCount / props.userPerPage)
     const pagesCount = Array.from({length: pages}, (v, i) => i + 1)
     const allUsers = props.users.map(u =>
-        <User key={u.id} user={u} follow={props.follow} unfollow={props.unfollow}/>)
+        <User key={u.id}
+              user={u}
+              follow={props.follow}
+              unfollow={props.unfollow}
+              toggleMakingRequest={props.toggleMakingRequest}
+              makingRequestFor = {props.makingRequestFor}
+        />)
 
     const pagination = pagesCount.map(e => <span key={e}
         onClick={() => props.setPage(e)}
