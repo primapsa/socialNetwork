@@ -3,12 +3,12 @@ import store, {StateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {
-    follow,
+    follow, followThunk,
     setCurrentPage,
     setTotalCount,
     setUsers,
     toggleMakingRequest,
-    unfollow,
+    unfollow, unfollowThunk,
     UsersType
 } from "../../redux/usersReducer";
 import axios from "axios";
@@ -21,13 +21,13 @@ type UsersConatinerOuterPropsType = {
     userPerPage: number,
     totalCount: number
     currentPage: number
-    follow: (id: number) => void
-    unfollow: (id: number) => void
     setUsers: (users: UsersType[]) => void
     setCurrentPage: (page: number) => void
     setTotalCount: (totalCount: number) => void
     toggleMakingRequest: (isFetching: boolean, userID: number) => void
     makingRequestFor: number[]
+    followThunk: (id: number) => void
+    unfollowThunk: (id: number) => void
 }
 
 
@@ -52,8 +52,8 @@ class UsersContainer extends React.Component<UsersConatinerOuterPropsType> {
                 <Users  users={this.props.users}
                         userPerPage={this.props.userPerPage}
                         totalCount={this.props.totalCount}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
+                        follow={this.props.followThunk}
+                        unfollow={this.props.unfollowThunk}
                         currentPage={this.props.currentPage}
                         setPage={this.onHandler}
                         toggleMakingRequest = {this.props.toggleMakingRequest}
@@ -74,15 +74,8 @@ const mapStateToProp = (state: StateType) => (
         makingRequestFor: state.users.makingRequestFor
     }
 )
-// const mapDispatchToProps = (dispatch: Dispatch) => (
-//     {
-//         follow: (id: number) => dispatch(follow(id)),
-//         unfollow: (id: number) => dispatch(unfollow(id)),
-//         setUsers: (users: UsersType[]) => dispatch(setUsers(users)),
-//         setCurrentPage: (page: number) => dispatch(setCurrentPage(page)),
-//         setTotalCount: (totalCount: number) => dispatch(setTotalCount(totalCount))
-//     })
 
 
 
-export default connect(mapStateToProp, {follow, unfollow, setUsers, setCurrentPage, setTotalCount, toggleMakingRequest})(UsersContainer)
+
+export default connect(mapStateToProp, {setUsers, setCurrentPage, setTotalCount, toggleMakingRequest, followThunk, unfollowThunk})(UsersContainer)
