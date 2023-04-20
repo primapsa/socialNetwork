@@ -13,6 +13,7 @@ import {
 } from "../../redux/usersReducer";
 import axios from "axios";
 import Users from "./Users";
+import {userAPI} from "../../api/api";
 
 
 type UsersConatinerOuterPropsType = {
@@ -33,22 +34,19 @@ type UsersConatinerOuterPropsType = {
 class UsersContainer extends React.Component<UsersConatinerOuterPropsType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.userPerPage}`, {withCredentials: true}).then(response => {
+        userAPI.getUser(this.props.currentPage,this.props.userPerPage ).then(response => {
             this.props.setTotalCount(response.data.totalCount)
             this.props.setUsers(response.data.items)
         })
     }
     onHandler = (page: number) => {
-
         this.props.setCurrentPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.userPerPage}`, {withCredentials: true}).then(response => {
+        userAPI.getUser(page,this.props.userPerPage ).then(response => {
             this.props.setUsers(response.data.items)
         })
     }
 
     render = () => {
-
-
         return (
             <>
                 <Users  users={this.props.users}
