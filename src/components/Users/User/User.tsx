@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './User.module.css'
-import {UsersType} from "../../../redux/usersReducer";
+import {followThunk, UsersType} from "../../../redux/usersReducer";
 import avatar from './../../../image/avatar.png'
 import {NavLink} from "react-router-dom";
 import axios from "axios";
@@ -19,20 +19,8 @@ const User = ({user, follow, unfollow, toggleMakingRequest, makingRequestFor}: U
     const onclickHandler = () => {
 
         toggleMakingRequest(true, user.id)
+        user.followed ? unfollow(user.id) : follow(user.id)
 
-        user.followed ? userAPI.unfollowUser(user.id)
-                .then(response => {
-                    if (response.resultCode === 0) {
-                        unfollow(user.id)
-                    }
-                    toggleMakingRequest(false,user.id)
-                }) :
-            userAPI.followUser(user.id).then(response => {
-                if (response.resultCode === 0) {
-                    follow(user.id)
-                }
-                toggleMakingRequest(false,user.id)
-            });
     }
 
     return (
