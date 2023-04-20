@@ -12,7 +12,9 @@ export const userAPI = {
         .then(response => response.data),
 
     followUser: (userID: number): Promise<any> => axiosInstance.post(`follow/${userID}`, {})
-        .then(response => response.data)
+        .then(response => response.data),
+
+    getUser: (page: number, count: number):Promise<any> => axiosInstance.get(`users?page=${page}&count=${count}`)
 
 
 }
