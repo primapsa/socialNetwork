@@ -1,6 +1,15 @@
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+
 export const setUserAuth = (data: SetUserAuthAttributeType) => ({type: 'SET-USER-AUTH', payload: data} as const)
+export const authThunk = () => (dispatch: Dispatch) => {
+    authAPI.me().then( resolve => dispatch(setUserAuth(resolve.data)))
+}
+
+
 type SetUserAuthType = ReturnType<typeof setUserAuth>
 type SetUserAuthAttributeType = Omit<UserAuthStateType, 'isAuth'>
+
 
 export type UserAuthStateType = {
     id: number | null
