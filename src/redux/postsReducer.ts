@@ -1,4 +1,6 @@
 import {PostsInnerStateType, ProfileInnerType} from "../types";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
 
 export type ActionType = AddNewPostType | AddNewPostTextType | SetProfileType
 type AddNewPostType = ReturnType<typeof addNewPost>
@@ -8,6 +10,9 @@ export const addNewPost = () => ({type: 'ADD_NEW_POST'} as const)
 export const addNewPostText = (value: string) => ({type: 'ADD_NEW_INPUT', inputValue: value} as const)
 export const setProfile = (value: ProfileInnerType | null) => ({type: 'SET_PROFILE', profile: value} as const)
 
+export const setProfileThunk = (userID: number) => (dispatch: Dispatch) => {
+    profileAPI.getProfile(userID).then(response => dispatch(setProfile(response.data)))
+}
 
 const initial = {
     postsText: [
