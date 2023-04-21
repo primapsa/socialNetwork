@@ -4,9 +4,9 @@ import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {addNewPost, addNewPostText, setProfile} from "../../redux/postsReducer";
 import {PostsInnerStateType, ProfileInnerType} from "../../types";
-import axios from "axios";
 
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {profileAPI} from "../../api/api";
 
 type MatchParamType = {
     userId: string
@@ -22,16 +22,18 @@ type ProfileContainerPropsTytpe = RouteComponentProps<MatchParamType> & {
 
 class ProfileContainer extends React.Component<ProfileContainerPropsTytpe> {
     componentDidMount() {
-        const userID = this.props.match.params.userId
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`).then( response => this.props.setProfile(response.data))
+        const userID = Number(this.props.match.params.userId)
+        profileAPI.getProfile(userID).then(response => this.props.setProfile(response.data))
     }
 
     render() {
-        return <Profile state={this.props.profilePosts} addNewPost={this.props.addNewPost} addNewPostText={this.props.addNewPostText}/>
+        return <Profile state={this.props.profilePosts} addNewPost={this.props.addNewPost}
+                        addNewPostText={this.props.addNewPostText}/>
     }
 }
+
 const mapStateToProps = (state: StateType) => ({
- profilePosts: state.posts
+    profilePosts: state.posts
 })
 const ProfileContainerWithRouter = withRouter(ProfileContainer)
 export default connect(mapStateToProps, {addNewPost, addNewPostText, setProfile})(ProfileContainerWithRouter);
