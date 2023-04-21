@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {userAPI} from "../api/api";
+import {authAPI, userAPI} from "../api/api";
 
 export const follow = (id: number) => ({type: 'FOLLOW', payload: {id}} as const)
 export const unfollow = (id: number) => ({type: 'UNFOLLOW', payload: {id}} as const)
@@ -29,7 +29,17 @@ export const unfollowThunk = (userID: number) => (dispatch: Dispatch) => {
             toggleMakingRequest(false, userID)
         })
 }
-
+export const getUsersThunk = (page: number, count: number) => (dispatch: Dispatch) => {
+    userAPI.getUser(page, count).then(response => {
+        dispatch(setTotalCount(response.data.totalCount))
+        dispatch(setUsers(response.data.items))
+    })
+}
+export const getUserSetThunk = (page: number, count: number) => (dispatch: Dispatch) => {
+    userAPI.getUser(page, count).then(response => {
+        dispatch(setUsers(response.data.items))
+    })
+}
 
 type ActionType = FollowACType
     | UnFollowACType
